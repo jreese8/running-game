@@ -18,23 +18,25 @@ let player = {
     height : playerHeight
 }
 
-//cactus
-let cactusArray = [];
+//enemies
+let enemyArray = [];
 
-let cactus1Width = 46;
-let cactus2Width = 69;
-let cactus3Width = 102;
+let enemy1Width = 53; //Soldier
+let enemy2Width = 78; //Alien
+let enemy3Width = 95; // Egg Pawn
 
-let cactusHeight = 70;
-let cactusX = 700;
-let cactusY = boardHeight - cactusHeight;
+let enemyHeight = 80;
 
-let cactus1Img;
-let cactus2Img;
-let cactus3Img;
+let enemyX = 700;
+
+let enemyY = boardHeight - enemyHeight;
+
+let enemy1Img;
+let enemy2Img;
+let enemy3Img;
 
 //physics
-let velocityX = -8; //cacti moving left because negative is left & positive is right
+let velocityX = -8; //enemy moving left because negative is left & positive is right
 let velocityY = 0;
 let gravity = .4;
 let gameOver = false;
@@ -55,17 +57,17 @@ window.onload = function() {
         context.drawImage(playerImg, player.x, player.y, player.width, player.height);
     }
 
-    cactus1Img = new Image();
-    cactus1Img.src ="./assets/cactus1.png";
+    enemy1Img = new Image();
+    enemy1Img.src ="./assets/Soldier.png";
 
-    cactus2Img = new Image();
-    cactus2Img.src ="./assets/cactus2.png";
+    enemy2Img = new Image();
+    enemy2Img.src ="./assets/Alien.png";
 
-    cactus3Img = new Image();
-    cactus3Img.src ="./assets/cactus3.png";
+    enemy3Img = new Image();
+    enemy3Img.src ="./assets/eggPawn.png";
 
     requestAnimationFrame(update);
-    setInterval(placeCactus, 1000)//1000 milliseconds = 1 second
+    setInterval(placeEnemy, 1000)//1000 milliseconds = 1 second
     document.addEventListener("keydown", movePlayer);
 }
 
@@ -83,13 +85,13 @@ function update() {
     player.y = Math.min(player.y + velocityY, playerY); //apply gravity to player.y; making sure it doesn't fall thru floor
     context.drawImage(playerImg, player.x, player.y, player.width, player.height);
 
-    //cactus
-    for (let i = 0; i < cactusArray.length; i++) {
-        let cactus = cactusArray[i];
-        cactus.x += velocityX;
-        context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height);
+    //enemies
+    for (let i = 0; i < enemyArray.length; i++) {
+        let enemy = enemyArray[i];
+        enemy.x += velocityX;
+        context.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
 
-        if (detectCollision(player, cactus)) {
+        if (detectCollision(player, enemy)) {
             gameOver = true;
             playerImg.src = "./assets/ShadowDeath.png";
             playerImg.onload = function() {
@@ -118,39 +120,39 @@ function movePlayer(e) {
 
 }
 
-function placeCactus() {
+function placeEnemy() {
     if (gameOver) {
         return;
     }
 
-    //place cacti
-    let cactus = {
+    //place enemy
+    let enemy = {
         img : null,
-        x : cactusX,
-        y : cactusY,
+        x : enemyX,
+        y : enemyY,
         width : null,
-        height : cactusHeight
+        height : enemyHeight
     }
 
-    let placeCactusChance = Math.random(); // 0 - 0.99999.....
+    let placeEnemyChance = Math.random(); // 0 - 0.99999.....
 
-    if (placeCactusChance > .90) { // 10% for cactus3
-        cactus.img = cactus3Img;
-        cactus.width = cactus3Width;
-        cactusArray.push(cactus);
+    if (placeEnemyChance > .90) { // 10% for enemy1
+        enemy.img = enemy1Img;
+        enemy.width = enemy1Width;
+        enemyArray.push(enemy);
     }
-    else if (placeCactusChance > .70) { // 30% for cactus2
-        cactus.img = cactus2Img;
-        cactus.width = cactus2Width;
-        cactusArray.push(cactus);
+    else if (placeEnemyChance > .70) { // 30% for enemy2
+        enemy.img = enemy2Img;
+        enemy.width = enemy2Width;
+        enemyArray.push(enemy);
     }
-    else if (placeCactusChance > .50) { // 50% for cactus1
-        cactus.img = cactus1Img;
-        cactus.width = cactus1Width;
-        cactusArray.push(cactus);
+    else if (placeEnemyChance > .50) { // 50% for enemy3
+        enemy.img = enemy3Img;
+        enemy.width = enemy31Width;
+        enemyArray.push(enemy);
     }
-    if (cactusArray.length > 5) {
-        cactusArray.shift(); //remove 1st element from array so that array won't continue to grow
+    if (enemyArray.length > 5) {
+        enemyArray.shift(); //remove 1st element from array so that array won't continue to grow
     }
 
 }
