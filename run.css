@@ -1,9 +1,21 @@
 body {
+    background-image: url('./assets/background.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
 }
 
 #board {
-    background-color: lightgray;
-    border-bottom: 1px solid black;
+    background-image: url('./assets/background-board.png');
+    border-bottom: 1px solid white;
+}
+
+h1 {
+    color: firebrick;
+}
+
+h3 {
+    color: ghostwhite;
 }

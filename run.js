@@ -1,12 +1,12 @@
 //board
 let board;
-let boardWidth = 750;
+let boardWidth = 637;
 let boardHeight = 250;
 let context;
 
-//player
-let playerWidth = 88;
-let playerHeight = 94;
+//player character
+let playerWidth = 40;
+let playerHeight = 54;
 let playerX = 50;
 let playerY = boardHeight - playerHeight;
 let playerImg;
@@ -18,10 +18,10 @@ let player = {
     height : playerHeight
 }
 
-//cacti
+//cactus
 let cactusArray = [];
 
-let cactus1Width = 34;
+let cactus1Width = 46;
 let cactus2Width = 69;
 let cactus3Width = 102;
 
@@ -49,7 +49,7 @@ window.onload = function() {
     context = board.getContext("2d")//used for drawing on the board
 
     playerImg = new Image();
-    playerImg.src = "./assets/player.png";
+    playerImg.src = "./assets/Shadow.png";
     playerImg.onload = function() {
         
         context.drawImage(playerImg, player.x, player.y, player.width, player.height);
@@ -91,7 +91,7 @@ function update() {
 
         if (detectCollision(player, cactus)) {
             gameOver = true;
-            playerImg.src = "./assets/playerdead.png";
+            playerImg.src = "./assets/ShadowDeath.png";
             playerImg.onload = function() {
                 context.drawImage(playerImg, player.x, player.y, player.width, player.height);
             }
