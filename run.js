@@ -42,8 +42,7 @@ let gravity = .4;
 let gameOver = false;
 let score = 0;
 
-
-window.onload = function() {
+function boardFunction() {
     board = document.getElementById("board");
     board.height = boardHeight;
     board.width = boardWidth;
@@ -52,7 +51,7 @@ window.onload = function() {
 
     playerImg = new Image();
     playerImg.src = "./assets/Shadow.png";
-    playerImg.onload = function() {
+    playerImg.onclick = function() {
         
         context.drawImage(playerImg, player.x, player.y, player.width, player.height);
     }
@@ -69,6 +68,10 @@ window.onload = function() {
     requestAnimationFrame(update);
     setInterval(placeEnemy, 1000)//1000 milliseconds = 1 second
     document.addEventListener("keydown", movePlayer);
+
+    var audio = new Audio("./assets/Westopolis.mp3");
+    audio.play();
+    audio.loop = true;
 }
 
 function update() {
@@ -93,10 +96,10 @@ function update() {
 
         if (detectCollision(player, enemy)) {
             gameOver = true;
-            playerImg.src = "./assets/ShadowDeath.png"; //need to fix this simply displaying on top of the previous img rather than overwriting it...
-            playerImg.onload = function() {
-                context.drawImage(playerImg, player.x, player.y, player.width, player.height);
-            }
+            // playerImg.src = "./assets/ShadowDeath.png"; //need to fix this simply displaying on top of the previous img rather than overwriting it...
+            // playerImg.onload = function() {
+            //     context.drawImage(playerImg, player.x, player.y, player.width, player.height);
+            // }
 
             //let player know game is over
             window.alert("Game Over!");
@@ -188,10 +191,3 @@ function detectCollision (a, b) {
            a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
            a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
 }
-
-// var music = new Audio();
-// function playMusic() {
-//     music.pause(file);
-//     music = new Audio();
-//     music.play();
-// }
