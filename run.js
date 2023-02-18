@@ -93,9 +93,34 @@ function update() {
 
         if (detectCollision(player, enemy)) {
             gameOver = true;
-            playerImg.src = "./assets/ShadowDeath.png";
+            playerImg.src = "./assets/ShadowDeath.png"; //need to fix this simply displaying on top of the previous img rather than overwriting it...
             playerImg.onload = function() {
                 context.drawImage(playerImg, player.x, player.y, player.width, player.height);
+            }
+
+            //let player know game is over
+            window.alert("Game Over!");
+  
+            // check localStorage for high score, if it's not there, use 0
+            var highScore = localStorage.getItem("highscore");
+                if (highScore === null) {
+                    highScore = 0;
+                }
+  
+            // if player has a higher score than the previous high score, high score will be updated
+            if (score > highScore) {
+                localStorage.setItem("highscore", score);
+                alert(" The new highscore is " + score + "!");
+                } else {
+                alert( highScore + " is still the reigning highscore.");
+                }
+  
+            // ask player if they'd like to play again
+            var playAgainConfirm = window.confirm("Play again?");
+                if (playAgainConfirm) {
+                window.location.reload();
+                } else {
+                window.alert("Thank you for playing Shadow The Hedgehog: Running Game.");
             }
         }
     }
@@ -148,7 +173,7 @@ function placeEnemy() {
     }
     else if (placeEnemyChance > .50) { // 50% for enemy3
         enemy.img = enemy3Img;
-        enemy.width = enemy31Width;
+        enemy.width = enemy3Width;
         enemyArray.push(enemy);
     }
     if (enemyArray.length > 5) {
@@ -163,3 +188,10 @@ function detectCollision (a, b) {
            a.y < b.y + b.height &&  //a's top left corner doesn't reach b's bottom left corner
            a.y + a.height > b.y;    //a's bottom left corner passes b's top left corner
 }
+
+// var music = new Audio();
+// function playMusic() {
+//     music.pause(file);
+//     music = new Audio();
+//     music.play();
+// }
