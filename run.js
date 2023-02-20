@@ -67,7 +67,7 @@ function boardFunction() {
 
     requestAnimationFrame(update);
     setInterval(placeEnemy, 1000)//1000 milliseconds = 1 second
-    document.addEventListener("keydown", 'touchstart', movePlayer);
+    document.addEventListener("keydown" || 'touchstart', movePlayer);
 
     var audio = new Audio("./assets/Westopolis.mp3");
     audio.play();
@@ -141,7 +141,7 @@ function movePlayer(e) {
         return;
     }
 
-    if ((e.code == "Space" || e.code == "ArrowUp") && player.y == playerY) { //playerY is default position
+    if ((e.code == "Space" || e.code == "ArrowUp" || e.code == "process_touchstart") && player.y == playerY) { //playerY is default position
         //jump
         velocityY = -10;
     }
