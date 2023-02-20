@@ -19,3 +19,15 @@ h1 {
 h3 {
     color: ghostwhite;
 }
+
+#btn {
+    color: white;
+    background-color: darkred;
+    padding: 15px;
+}
+
+#btn:hover {
+    color: black;
+    background-color: crimson;
+    font-weight: bold;
+}
