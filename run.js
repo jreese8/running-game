@@ -67,7 +67,7 @@ function boardFunction() {
 
     requestAnimationFrame(update);
     setInterval(placeEnemy, 1000)//1000 milliseconds = 1 second
-    document.addEventListener("keydown", movePlayer);
+    document.addEventListener("keydown", 'touchstart', movePlayer);
 
     var audio = new Audio("./assets/Westopolis.mp3");
     audio.play();
