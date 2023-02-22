@@ -19,4 +19,4 @@
 
 
   ## Screenshot
-  <img src="./src/assets/shdwrg.png">
+  <img src="./src/assets/shadowSC.png">
